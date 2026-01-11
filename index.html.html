@@ -19,7 +19,16 @@
             box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
         }
         .grid-container { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; max-width: 800px; width: 100%; }
-        .card { aspect-ratio: 2 / 3; background-image: url('images/card_back.png'); background-size: cover; background-position: center; border: 1px solid #ff00ff; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+        .card { 
+    aspect-ratio: 2 / 3; 
+    background-image: url('card_back.png'); /* images/ を削除 */
+    background-size: cover; 
+    background-position: center; 
+    border: 1px solid #ff00ff; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    transition: 0.2s; 
+}
         .card.selected { opacity: 0.1; pointer-events: none; }
 
         /* モーダル */
@@ -131,14 +140,15 @@
         }
 
         function fillRow(id, list) {
-            const row = document.getElementById(id); row.innerHTML = "";
-            list.forEach(n => {
-                const data = HEX_DATA[n];
-                const box = document.createElement('div'); box.className = 'result-card-box';
-                box.innerHTML = `<img src="images/card${n}.png"><br><b style="color:#ff00ff">${data[0]}</b><br><span style="font-size:8px">${data[1]}</span>`;
-                row.appendChild(box);
-            });
-        }
+    const row = document.getElementById(id); row.innerHTML = "";
+    list.forEach(n => {
+        const data = HEX_DATA[n];
+        const box = document.createElement('div'); box.className = 'result-card-box';
+        // 下の src から images/ を削除
+        box.innerHTML = `<img src="card${n}.png"><br><b style="color:#ff00ff">${data[0]}</b><br><span style="font-size:8px">${data[1]}</span>`;
+        row.appendChild(box);
+    });
+}
 
         async function capture(mode) {
             const area = document.getElementById('report-capture-area');
@@ -160,4 +170,5 @@
         document.getElementById('open-img-btn').onclick = () => capture('open');
     </script>
 </body>
+
 </html>
